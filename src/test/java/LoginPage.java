@@ -1,4 +1,3 @@
-//package com.app.geteasyqa;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,30 +10,22 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.fail;
 
-
 public class LoginPage {
     private WebDriver driver;
     private boolean acceptNextAlert = true;
-    private StringBuffer verificationErrors = new StringBuffer();
-
+    private final StringBuffer verificationErrors = new StringBuffer();
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\auto\\chromedriver_win32\\chromedriver.exe");
-        //ChromeDriver driver = new ChromeDriver();
-        //driver.get("https://app.geteasyqa.com/");
-        //ChromeOptions options = new ChromeOptions();
-       // options.addArguments("--ignore-certificate-errors");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--ignore-certificate-errors");
         driver = new ChromeDriver(options);
-
     }
 
     @Test
-    public void testLoginPage() throws Exception {
+   public void testLoginPage() throws Exception {
         driver.get("https://app.geteasyqa.com/users/sign_in");
         driver.findElement(By.id("user_email")).click();
         driver.findElement(By.id("user_email")).clear();
@@ -43,6 +34,8 @@ public class LoginPage {
         driver.findElement(By.id("user_password")).clear();
         driver.findElement(By.id("user_password")).sendKeys("123456");
         driver.findElement(By.name("commit")).click();
+        driver.close();
+
     }
 
     @AfterClass(alwaysRun = true)
