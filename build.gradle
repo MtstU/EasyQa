@@ -17,10 +17,13 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '4.0.0-alpha-5'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 
-// https://mvnrepository.com/artifact/org.testng/testng
+    // https://mvnrepository.com/artifact/org.testng/testng
     testImplementation group: 'org.testng', name: 'testng', version: '7.0.0'
+
+    // https://mvnrepository.com/artifact/com.codeborne/selenide
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.19.0'
 
 }
 
