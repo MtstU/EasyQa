@@ -9,13 +9,12 @@ import org.testng.annotations.Test;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EqFirstTest {
-    //private boolean acceptNextAlert = true;
-    //private final StringBuffer verificationErrors = new StringBuffer();
 
     @BeforeClass(alwaysRun = true)
     public void setUp() {
         //browserCapabilities.setAcceptInsecureCerts(true);
         Configuration.browser = "chrome";
+        Configuration.browserSize = "1600x1000";
 
     }
 
