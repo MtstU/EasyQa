@@ -1,6 +1,7 @@
 
 import com.codeborne.selenide.Configuration;
 import com.easyqa.qa.pages.*;
+import com.easyqa.qa.pages.util.CardData;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -17,7 +18,7 @@ public class EqFirstTest {
         browser = "chrome";
         Configuration.browserSize = "1600x1000";
     }
-/*
+
     @Test
     public void loginAsRegisteredUser() {
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in",LoginPage.class);
@@ -37,9 +38,10 @@ public class EqFirstTest {
         ProjectsPage projectsPage = dashboardPage.openMyProjects();
         projectsPage.checkProjectsPage();
     }
-*/
+
     @Test
     public void createCard() {
+        CardData issue = new CardData("test2", "issue description");
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in", LoginPage.class);
         loginPage.enterLogin("me_se@mail.ru");
         loginPage.enterPassword("123456");
@@ -52,8 +54,8 @@ public class EqFirstTest {
         IssuesPage issuesPage = projectDashboardPage.openIssues();
         issuesPage.checkIssuesPage();
         issuesPage.clickAddNewIssue();
-        issuesPage.AddNewIssue("test1", "issue description");
-        issuesPage.checkIssueAdded("test1");
+        issuesPage.AddNewIssue(issue.getCardName(), issue.getCardDescription());
+        issuesPage.checkIssueAdded(issue.getCardName());
 
     }
 
