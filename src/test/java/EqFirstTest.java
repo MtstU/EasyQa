@@ -17,7 +17,7 @@ public class EqFirstTest {
         browser = "chrome";
         Configuration.browserSize = "1600x1000";
     }
-
+/*
     @Test
     public void loginAsRegisteredUser() {
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in",LoginPage.class);
@@ -37,10 +37,10 @@ public class EqFirstTest {
         ProjectsPage projectsPage = dashboardPage.openMyProjects();
         projectsPage.checkProjectsPage();
     }
-
+*/
     @Test
     public void createCard() {
-        LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in",LoginPage.class);
+        LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in", LoginPage.class);
         loginPage.enterLogin("me_se@mail.ru");
         loginPage.enterPassword("123456");
         DashboardPage dashboardPage = loginPage.clickLoginBtn();
@@ -50,8 +50,12 @@ public class EqFirstTest {
         ProjectDashboardPage projectDashboardPage = projectsPage.openProject();
         projectDashboardPage.checkProjectDashboardPage();
         IssuesPage issuesPage = projectDashboardPage.openIssues();
+        issuesPage.checkIssuesPage();
+        issuesPage.clickAddNewIssue();
+        issuesPage.AddNewIssue("test1", "issue description");
+        issuesPage.checkIssueAdded("test1");
 
-
+    }
 
     @AfterMethod
     public void tearDown() {
