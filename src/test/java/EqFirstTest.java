@@ -2,7 +2,7 @@
 import com.codeborne.selenide.Configuration;
 import com.easyqa.qa.pages.*;
 import com.easyqa.qa.pages.util.CardData;
-import org.testng.annotations.AfterClass;
+import com.easyqa.qa.pages.util.UserData;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -21,18 +21,20 @@ public class EqFirstTest {
 
     @Test
     public void loginAsRegisteredUser() {
+        UserData theUser = new UserData("me_se@mail.ru", "123456");
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in",LoginPage.class);
-        loginPage.enterLogin("me_se@mail.ru");
-        loginPage.enterPassword("123456");
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
         DashboardPage dashboardPage = loginPage.clickLoginBtn();
         dashboardPage.checkUserAuthorized();
     }
 
     @Test
     public void openProjects() {
+        UserData theUser = new UserData("me_se@mail.ru", "123456");
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in",LoginPage.class);
-        loginPage.enterLogin("me_se@mail.ru");
-        loginPage.enterPassword("123456");
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
         DashboardPage dashboardPage = loginPage.clickLoginBtn();
         dashboardPage.checkUserAuthorized();
         ProjectsPage projectsPage = dashboardPage.openMyProjects();
@@ -42,9 +44,10 @@ public class EqFirstTest {
     @Test
     public void createCard() {
         CardData issue = new CardData("test2", "issue description");
+        UserData theUser = new UserData("me_se@mail.ru", "123456");
         LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in", LoginPage.class);
-        loginPage.enterLogin("me_se@mail.ru");
-        loginPage.enterPassword("123456");
+        loginPage.enterLogin(theUser.getUserEmail());
+        loginPage.enterPassword(theUser.getUserPassword());
         DashboardPage dashboardPage = loginPage.clickLoginBtn();
         dashboardPage.checkUserAuthorized();
         ProjectsPage projectsPage = dashboardPage.openMyProjects();
