@@ -27,8 +27,17 @@ public class IssuesPage {
     @FindBy(id = "issue_priority")
     public SelenideElement issuePrioritySelector;
 
+    @FindBy(xpath = "//label[.='Low']")
+    public SelenideElement issuePriorityLow;
+
+    @FindBy(xpath = "//label[.='Medium']")
+    public SelenideElement issuePriorityMedium;
+
     @FindBy(xpath = "//label[.='High']")
     public SelenideElement issuePriorityHigh;
+
+    @FindBy(xpath = "//label[.='Critical']")
+    public SelenideElement issuePriorityCritical;
 
     @FindBy(name = "commit")
     public SelenideElement issueSaveBtn;
@@ -50,20 +59,52 @@ public class IssuesPage {
         issueTypeBug.click();
     }
 
+    public void setIssuePriorityLow () {
+        issuePrioritySelector.click();
+        issuePriorityLow.click();
+    }
+
+    public void setIssuePriorityMedium () {
+        issuePrioritySelector.click();
+        issuePriorityMedium.click();
+    }
+
     public void setIssuePriorityHigh () {
         issuePrioritySelector.click();
         issuePriorityHigh.click();
     }
 
-    public void AddNewIssue (String issueName, String issueDesc) {
+    public void setIssuePriorityCritical () {
+        issuePrioritySelector.click();
+        issuePriorityCritical.click();
+    }
+
+    public void AddNewIssue (String issueName, String issueDesc, int issuePriority) {
         issueSummary.click();
         issueSummary.sendKeys(issueName);
-
         issueDescription.click();
         issueDescription.sendKeys(issueDesc);
         setIssueTypeBug();
-        setIssuePriorityHigh();
+        //setIssuePriorityHigh();
+        setPriority(issuePriority);
         issueSaveBtn.click();
+    }
+
+    public void setPriority (int priority) {
+        switch (priority) {
+            case 1:
+                setIssuePriorityLow();
+                break;
+            case 2:
+                setIssuePriorityMedium();
+                break;
+            case 3:
+                setIssuePriorityHigh();
+                break;
+            case 4:
+                setIssuePriorityCritical();
+                break;
+        }
     }
 
     public void checkIssueAdded (String issueName) {

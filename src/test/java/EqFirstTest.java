@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class EqFirstTest {
     PageAddressData pageAddressData = new PageAddressData("https://app.geteasyqa.com/users/sign_in");
     UserData theUser = new UserData("me_se@mail.ru", "123456");
-    CardData issue = new CardData("test2", "issue description");
+    CardData issue = new CardData("test2", "issue description", 1);
 
     @BeforeClass(alwaysRun = true)
     public void setUp() {
@@ -45,9 +45,6 @@ public class EqFirstTest {
 
     @Test
     public void createCard() {
-        //CardData issue = new CardData("test2", "issue description");
-        //UserData theUser = new UserData("me_se@mail.ru", "123456");
-        //LoginPage loginPage = open("https://app.geteasyqa.com/users/sign_in", LoginPage.class);
         LoginPage loginPage = open(pageAddressData.getPageAddress(),LoginPage.class);
         loginPage.enterLogin(theUser.getUserEmail());
         loginPage.enterPassword(theUser.getUserPassword());
@@ -60,7 +57,7 @@ public class EqFirstTest {
         IssuesPage issuesPage = projectDashboardPage.openIssues();
         issuesPage.checkIssuesPage();
         issuesPage.clickAddNewIssue();
-        issuesPage.AddNewIssue(issue.getCardName(), issue.getCardDescription());
+        issuesPage.AddNewIssue(issue.getCardName(), issue.getCardDescription(), issue.getIssuePriority());
         issuesPage.checkIssueAdded(issue.getCardName());
 
     }
