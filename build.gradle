@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.3"
+    }
+}
+
 plugins {
     id 'java'
 }
@@ -6,6 +15,7 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java-library'
+apply plugin: 'io.qameta.allure'
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF8'
@@ -15,23 +25,43 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
-    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+configurations {
+    agent
+}
 
+dependencies {
     // https://mvnrepository.com/artifact/org.testng/testng
     testImplementation group: 'org.testng', name: 'testng', version: '7.0.0'
 
     // https://mvnrepository.com/artifact/com.codeborne/selenide
-    implementation group: 'com.codeborne', name: 'selenide', version: '5.19.0'
+    implementation group: 'com.codeborne', name: 'selenide', version: '5.0.1'
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+
+    api  'io.qameta.allure:allure-selenide:2.0-BETA22'
+    api  'com.beust:jcommander:1.72'
+    api  'org.projectlombok:lombok:1.16.18'
+    api  'org.assertj:assertj-core:3.8.0'
+    api 'org.aspectj:aspectjweaver:1.8.10'
 
 }
 
-task testbase (type: Test) {
+task testCards (type: Test) {
     useTestNG {
         suites "src/test/resources/testng.xml"
     }
+    systemProperty 'allure.model.indentOutput', true
+    systemProperty 'allure.results.directory', 'build/allure-results'
 }
+
+allure {
+    version = '2.2.1'
+    autoconfigure = true
+    aspectjweaver = true
+    allureJavaVersion = '2.0-BETA21'
+}
+
 
 //testbase.doFirst {
 //    jvmArgs '-Dwdm.chromeDriverVersion=88.0.4324.96'
