@@ -1,5 +1,7 @@
 package com.easyqa.qa.pages.util;
 
+import io.qameta.allure.Step;
+
 public class PageAddressData {
 
     private String pageAddress;
@@ -8,8 +10,8 @@ public class PageAddressData {
         this.pageAddress = pageAddress;
     }
 
+    @Step
     public String getPageAddress() {
-
         return this.pageAddress;
     }
 

@@ -2,6 +2,7 @@ package com.easyqa.qa.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 
 public class IssuesPage {
@@ -44,41 +45,41 @@ public class IssuesPage {
 
     @FindBy(xpath = "//div[@class='card_message']")
     public SelenideElement cardName;
-
+    @Step
     public void checkIssuesPage () {
         issuesHeader.shouldBe(Condition.visible);
         addNewIssueBtn.shouldBe(Condition.visible);
     }
-
+    @Step
     public void clickAddNewIssue () {
         addNewIssueBtn.click();
     }
-
+    @Step
     public void setIssueTypeBug () {
         issueTypeSelector.click();
         issueTypeBug.click();
     }
-
+    @Step
     public void setIssuePriorityLow () {
         issuePrioritySelector.click();
         issuePriorityLow.click();
     }
-
+    @Step
     public void setIssuePriorityMedium () {
         issuePrioritySelector.click();
         issuePriorityMedium.click();
     }
-
+    @Step
     public void setIssuePriorityHigh () {
         issuePrioritySelector.click();
         issuePriorityHigh.click();
     }
-
+    @Step
     public void setIssuePriorityCritical () {
         issuePrioritySelector.click();
         issuePriorityCritical.click();
     }
-
+    @Step
     public void AddNewIssue (String issueName, String issueDesc, int issuePriority) {
         issueSummary.click();
         issueSummary.sendKeys(issueName);
@@ -89,7 +90,7 @@ public class IssuesPage {
         setPriority(issuePriority);
         issueSaveBtn.click();
     }
-
+    @Step
     public void setPriority (int priority) {
         switch (priority) {
             case 1:
@@ -106,7 +107,7 @@ public class IssuesPage {
                 break;
         }
     }
-
+    @Step
     public void checkIssueAdded (String issueName) {
         cardName.shouldBe(Condition.text(issueName));
     }
